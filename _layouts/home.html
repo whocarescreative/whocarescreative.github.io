@@ -2,9 +2,14 @@
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
   {% include head.html %}
   <body>
-    <div class="col-2 mx-auto text-center mt-4">
+    <div class="col-2 mx-auto text-center mt-4 mb-5">
       Who cares about styling?
     </div>
+    {% for post in site.posts %}
+    <div class="col-4 mx-auto text-center">
+      <a class="text-bold" href="{{ post.url }}">{{ post.title }}</a>
+    </div>
+    {% endfor %}
     
   </body>
 </html>
