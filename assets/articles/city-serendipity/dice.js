@@ -1,18 +1,23 @@
 import { Detector } from './lib/Detector.js';
 import { THREE } from './lib/Three.js';
 import {} from './lib/cannon.js';
-import { CubeTexture, CubeTextureLoader } from './lib/CubeTexture.js';
+import { TextureLoader } from './lib/CubeTexture.js';
 
-var loader = new CubeTextureLoader();
-loader.setPath( 'assets/scripts/city-serendipity/' );
+const loader = new TextureLoader();
+loader.setPath( 'assets/articles/city-serendipity/' );
 
-var textureCube = loader.load( [
+const cubeTextures = [];
+for (const texturePath of [
 	'cube_face1.png', 'cube_face2.png',
 	'cube_face3.png', 'cube_face4.png',
 	'cube_face5.png', 'cube_face6.png'
-] );
+]) {
+    cubeTextures.push(
+        new THREE.MeshBasicMaterial( { color: 0xffffff, map: loader.load(texturePath) } )
+    );
+}
 
-var material = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube } );
+
 
 var world;
 var dt = 1 / 60;
@@ -91,10 +96,10 @@ function init() {
     scene.add(mesh);
 
     // cubes
-    var cubeGeo = new THREE.BoxGeometry( 1, 1, 1, 10, 10 );
-    var cubeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube } );
+    var cubeGeo = new THREE.BoxGeometry( 1, 1, 1 );
+    //var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: textureCube } );
     for(var i=0; i<N; i++){
-        cubeMesh = new THREE.Mesh(cubeGeo, cubeMaterial);
+        cubeMesh = new THREE.Mesh(cubeGeo, new THREE.MeshFaceMaterial(cubeTextures));
         cubeMesh.castShadow = true;
         meshes.push(cubeMesh);
         scene.add(cubeMesh);
