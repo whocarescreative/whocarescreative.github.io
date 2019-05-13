@@ -17,8 +17,6 @@ for (const texturePath of [
     );
 }
 
-
-
 var world;
 var dt = 1 / 60;
 
@@ -286,6 +284,28 @@ function initCannon(){
     groundBody.addShape(groundShape);
     groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),-Math.PI/2);
     world.add(groundBody);
+
+    var groundShape = new CANNON.Plane();
+    var groundBody = new CANNON.Body({ mass: 0 });
+    groundBody.addShape(groundShape);
+    //groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0),-Math.PI/2);
+    groundBody.position = new CANNON.Vec3(0,0,-5);
+    world.add(groundBody);
+
+    var groundShape = new CANNON.Plane();
+    var groundBody = new CANNON.Body({ mass: 0 });
+    groundBody.addShape(groundShape);
+    groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),Math.PI);
+    groundBody.position = new CANNON.Vec3(0,0,5);
+    world.add(groundBody);
+
+    var groundShape = new CANNON.Plane();
+    var groundBody = new CANNON.Body({ mass: 0 });
+    groundBody.addShape(groundShape);
+    groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0),Math.PI * 3/2);
+    groundBody.position = new CANNON.Vec3(6,0,0);
+    world.add(groundBody);
+
 
     // Joint body
     var shape = new CANNON.Sphere(0.1);
