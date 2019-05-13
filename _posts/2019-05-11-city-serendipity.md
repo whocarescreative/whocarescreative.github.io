@@ -21,6 +21,8 @@ The following days, I would walk until I got hungry. Then, I would come across a
 
 Safe to say, this was a freeing feeling. I was never in a hurry. I didn’t have an itinerary. At most, my checklist was one item long. Wednesday was dedicated to Central Park. Thursday was dedicated to exploring around and inside the New York Public Library. On my way to the library, I discovered the Empire State building, like Columbus discovered America. [What a pleasant surprise.]
 
+<div id="dice"></div>
+
 Upon returning to Calgary, I didn’t feel like I needed a vacation from my vacation. I was happy with the pace of my trip, because I let go of the idea that a trip to a new city should be stressful and planned to the minute.
 
 You might share a similar opinion of travel. But if you don’t, let me introduce you to the idea of travel as a creative act. 
