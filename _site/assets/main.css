@@ -1,7 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=Lora");
 body, html {
   margin: 0;
   -webkit-font-smoothing: antialiased;
-  font-family: Helvetica, Arial, sans-serif; }
+  font-family: Lora; }
+
+h1, h2, h3 {
+  font-family: Arial, Helvetica, sans-serif; }
+
+p {
+  font-size: 20px;
+  line-height: 30px; }
 
 .text-bold {
   font-weight: bold; }
