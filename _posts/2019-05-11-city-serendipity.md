@@ -37,9 +37,9 @@ Stay for a few hours at free concert you heard a few blocks away. It is also a g
 **Or just sit and listen to your surroundings.**
 
 <div class="text-center mt-5 mb-2" style="height:100px;" id="sounds" data-playing="false"  role="switch" aria-checked="false">
-    <audio src="assets/scripts/city-serendipity/mp3/city-center.mp3" type="audio/mpeg"></audio>
-    <img class="mx-auto" id="play" style="height:100%;width:200px;object-fit:scale-down;cursor:pointer;" src="assets/scripts/city-serendipity/img/play.png"/>
-    <img class="mx-auto" id="pause" style="height:100%;width:200px;object-fit:scale-down;cursor:pointer;display:none" src="assets/scripts/city-serendipity/img/pause.png"/>
+    <audio src="assets/articles/city-serendipity/mp3/city-center.mp3" type="audio/mpeg"></audio>
+    <img class="mx-auto" id="play" style="height:100%;width:200px;object-fit:scale-down;cursor:pointer;" src="assets/articles/city-serendipity/img/play.png"/>
+    <img class="mx-auto" id="pause" style="height:100%;width:200px;object-fit:scale-down;cursor:pointer;display:none" src="assets/articles/city-serendipity/img/pause.png"/>
 </div>
 <div class="text-center mb-5" id="sounds-text" style="color:#0871AF;font-size:20px;">Play</div>
 
