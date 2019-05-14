@@ -9,11 +9,16 @@ body, html
 
 h1, h2, h3 {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto;
+    max-width: 900px;
 }
 
 p {
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 24px;
+    line-height: 36px;
+    margin: 0 auto;
+    max-width: 900px;
+    box-sizing: border-box;
 }
 
 .text-bold {
@@ -23,3 +28,15 @@ p {
 .text-center {
     text-align: center;
 }
+
+@media (max-width: 920px) {
+    p {
+        padding: 0 10px;
+        width: 100%;
+    }
+
+    h1, h2, h3 { 
+        padding: 0 10px;
+        width: 100%;
+    }
+  }

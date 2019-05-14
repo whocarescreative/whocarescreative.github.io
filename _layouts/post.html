@@ -2,11 +2,9 @@
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
   {% include head.html %}
   <body>
-    <div class="mx-auto col-md-8 col-sm-12">
-        <article>
-            {{ content }}
-        </article>
-    </div>
+    <article>
+        {{ content }}
+    </article>
   </body>
   <script type="module" src="/assets/articles/{{ page.snaketitle }}/main.js"></script>
 </html>

@@ -7,8 +7,6 @@ const audioContext = new AudioContext();
 const audioElement = sounds.querySelector('audio');
 const playImg = sounds.querySelector('#play');
 const pauseImg = sounds.querySelector('#pause');
-const watercolor = sounds.querySelector('#watercolor');
-watercolor.style.transition = 'all 0.3s ease-in-out';
 
 const track = audioContext.createMediaElementSource(audioElement);
 track.connect(audioContext.destination);
@@ -32,7 +30,6 @@ function play() {
     playImg.style.display = 'none';
     pauseImg.style.display = 'block';
     soundsText.innerText = 'Pause';
-    watercolor.style.transform = 'scale(1.3)'
 }
 
 
@@ -42,5 +39,4 @@ function pause() {
     pauseImg.style.display = 'none';
     playImg.style.display = 'block';
     soundsText.innerText = 'Play';
-    watercolor.style.transform = 'scale(1)'
 }

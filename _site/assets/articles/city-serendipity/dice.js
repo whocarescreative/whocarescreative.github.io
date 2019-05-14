@@ -21,7 +21,7 @@ var world;
 var dt = 1 / 60;
 
 const canvasHeight = 300;
-const canvasWidth = window.innerWidth;
+const canvasWidth = document.documentElement.clientWidth || document.body.clientWidth;
 
 var camera, scene, renderer, gplane=false, clickMarker=false;
 var geometry, material, mesh, markerMaterial, cubeMesh, constraintDown, pivot;
@@ -115,9 +115,17 @@ function init() {
 
     window.addEventListener( 'resize', onWindowResize, false );
 
-    renderer.domElement.addEventListener("mousemove", onMouseMove, false );
-    renderer.domElement.addEventListener("mousedown", onMouseDown, false );
-    renderer.domElement.addEventListener("mouseup", onMouseUp, false );
+    window.addEventListener("mousemove", onMouseMove, false );
+    window.addEventListener("mousedown", onMouseDown, false );
+    window.addEventListener("mouseup", onMouseUp, false );
+
+    //touch
+    window.addEventListener('touchstart', onTouchDown, false);
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    
+    window.addEventListener('touchcancel', onTouchEnd, false);
+    
+    window.addEventListener('touchend', onTouchEnd, false);
 }
 
 function setClickMarker(x,y,z) {
@@ -146,8 +154,63 @@ function onMouseMove(e){
     }
 }
 
-function onMouseDown(e){
-    console.log(e);
+function onTouchDown(e) {
+    const { x, y } = processTouch(e.touches);
+    
+
+    // Find mesh from a ray
+    var entity = findNearestIntersectingObject(x,y,camera,meshes);
+    var pos = entity.point;
+    if(pos && entity.object.geometry instanceof THREE.BoxGeometry){
+        constraintDown = true;
+        // Set marker on contact point
+        setClickMarker(pos.x,pos.y,pos.z,scene);
+
+        // Set the movement plane
+        setScreenPerpCenter(pos,camera);
+
+        var idx = meshes.indexOf(entity.object);
+        if(idx !== -1){
+            addMouseConstraint(pos.x,pos.y,pos.z,bodies[idx]);
+        }
+    }
+}
+
+function onTouchMove(e) {
+    const { x, y } = processTouch(e.touches);
+
+    // Move and project on the plane
+    if (gplane && mouseConstraint) {
+        var pos = projectOntoPlane(x,y,gplane,camera);
+        if(pos){
+            e.preventDefault();
+            setClickMarker(pos.x,pos.y,pos.z,scene);
+            moveJointToPoint(pos.x,pos.y,pos.z);
+        }
+    }
+}
+
+function processTouch(touches) {
+    for (const touch of touches) {
+        const {left, top} = container.getBoundingClientRect()
+
+        return { 
+            x: touch.clientX - left |0,
+            y: touch.clientY - top |0
+        };
+    }
+}
+
+function onTouchEnd(e) {
+    constraintDown = false;
+    // remove the marker
+    removeClickMarker();
+
+    // Send the remove mouse joint to server
+    removeJointConstraint();
+}
+
+function onMouseDown(e) {
     // Find mesh from a ray
     var entity = findNearestIntersectingObject(e.offsetX,e.offsetY,camera,meshes);
     var pos = entity.point;
@@ -289,21 +352,28 @@ function initCannon(){
     var groundBody = new CANNON.Body({ mass: 0 });
     groundBody.addShape(groundShape);
     //groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0),-Math.PI/2);
-    groundBody.position = new CANNON.Vec3(0,0,-5);
+    groundBody.position = new CANNON.Vec3(0,0,-7);
     world.add(groundBody);
 
     var groundShape = new CANNON.Plane();
     var groundBody = new CANNON.Body({ mass: 0 });
     groundBody.addShape(groundShape);
     groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),Math.PI);
-    groundBody.position = new CANNON.Vec3(0,0,5);
+    groundBody.position = new CANNON.Vec3(0,0,7);
     world.add(groundBody);
 
     var groundShape = new CANNON.Plane();
     var groundBody = new CANNON.Body({ mass: 0 });
     groundBody.addShape(groundShape);
     groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0),Math.PI * 3/2);
-    groundBody.position = new CANNON.Vec3(6,0,0);
+    groundBody.position = new CANNON.Vec3(4,0,0);
+    world.add(groundBody);
+
+    var groundShape = new CANNON.Plane();
+    var groundBody = new CANNON.Body({ mass: 0 });
+    groundBody.addShape(groundShape);
+    groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0),Math.PI * 1/2);
+    groundBody.position = new CANNON.Vec3(-14,0,0);
     world.add(groundBody);
 
 
