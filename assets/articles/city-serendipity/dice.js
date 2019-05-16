@@ -8,9 +8,9 @@ loader.setPath( 'assets/articles/city-serendipity/' );
 
 const cubeTextures = [];
 for (const texturePath of [
-	'cube_face1.png', 'cube_face2.png',
-	'cube_face3.png', 'cube_face4.png',
-	'cube_face5.png', 'cube_face6.png'
+	'cube_face2a.png', 'cube_face1a.png',
+	'cube_face5a.png', 'cube_face6a.png',
+	'cube_face4a.png', 'cube_face3a.png'
 ]) {
     cubeTextures.push(
         new THREE.MeshBasicMaterial( { color: 0xffffff, map: loader.load(texturePath) } )
@@ -53,8 +53,14 @@ function init() {
 
     // camera
     camera = new THREE.PerspectiveCamera( 30, canvasWidth / canvasHeight, 0.5, 10000 );
-    camera.position.set(10, 2, 0);
+    camera.position.set(10, 4, 0);
     camera.quaternion.setFromAxisAngle(new THREE.Vector3(0,1,0), Math.PI/2);
+
+    var quaternion = new THREE.Quaternion();
+    quaternion.setFromAxisAngle(new THREE.Vector3(1,0,0), -Math.PI/2);
+    //camera.quaternion.slerp(quaternion, 0.2);
+    camera.rotateOnAxis(new THREE.Vector3(1,0,0), -0.2)
+
     scene.add(camera);
 
     // lights
@@ -94,7 +100,7 @@ function init() {
     scene.add(mesh);
 
     // cubes
-    var cubeGeo = new THREE.BoxGeometry( 1, 1, 1 );
+    var cubeGeo = new THREE.BoxGeometry( 2, 2, 2 );
     //var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: textureCube } );
     for(var i=0; i<N; i++){
         cubeMesh = new THREE.Mesh(cubeGeo, new THREE.MeshFaceMaterial(cubeTextures));
@@ -102,6 +108,7 @@ function init() {
         meshes.push(cubeMesh);
         scene.add(cubeMesh);
     }
+    
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setSize( canvasWidth, canvasHeight );
@@ -327,12 +334,12 @@ function initCannon(){
     world.quatNormalizeSkip = 0;
     world.quatNormalizeFast = false;
 
-    world.gravity.set(0,-10,0);
+    world.gravity.set(0,-20,0);
     world.broadphase = new CANNON.NaiveBroadphase();
 
     // Create boxes
-    var mass = 5, radius = 1.3;
-    const boxShape = new CANNON.Box(new CANNON.Vec3(0.5,0.5,0.5));
+    var mass = 5;
+    const boxShape = new CANNON.Box(new CANNON.Vec3(1,1,1));
     for(var i=0; i<N; i++){
         const boxBody = new CANNON.Body({ mass: mass });
         boxBody.addShape(boxShape);
