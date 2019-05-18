@@ -57,15 +57,15 @@ const mousePrev = {
   x: -1, y: -1
 };
 const el = document.body;
-el.addEventListener('mousedown', e=>{
+canvas.addEventListener('mousedown', e=>{
   e.preventDefault();
   buttonsDown[e.button] = true;
 });
-el.addEventListener('mouseup', e=>{
+canvas.addEventListener('mouseup', e=>{
   e.preventDefault();
   buttonsDown[e.button] = false;
 });
-el.addEventListener('mousemove', e=>{
+canvas.addEventListener('mousemove', e=>{
   mousePrev.x = mouse.x;
   mousePrev.y = mouse.y;
   const {left, top} = el.getBoundingClientRect()

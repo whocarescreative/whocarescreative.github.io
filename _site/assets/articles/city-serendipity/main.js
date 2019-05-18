@@ -4,3 +4,4 @@ import {} from './eiffel_lean.js';
 import {} from './dice.js';
 import {} from './suggestion.js';
 import {} from './sounds.js';
+import {} from './cards.js';
