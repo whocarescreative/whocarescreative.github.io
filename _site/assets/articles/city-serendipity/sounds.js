@@ -1,5 +1,3 @@
-/* */
-
 const sounds = document.getElementById('sounds');
 const soundsText = document.getElementById('sounds-text');
 

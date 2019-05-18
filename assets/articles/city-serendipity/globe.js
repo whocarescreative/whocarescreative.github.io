@@ -56,7 +56,7 @@ const mouse = {
 const mousePrev = {
   x: -1, y: -1
 };
-const el = document.body;
+const el = canvas;
 el.addEventListener('mousedown', e=>{
   e.preventDefault();
   buttonsDown[e.button] = true;

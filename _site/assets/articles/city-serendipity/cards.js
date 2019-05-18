@@ -28,9 +28,6 @@ wrap.addEventListener('touchend', e => stop(e));
 wrap.addEventListener('touchmove', e => drag(e), { passive: false });
 wrap.addEventListener('mousemove', e => drag(e));
 
-
-
-
 function stop(ev) {
     isAnimating = false;
     startX = 0;

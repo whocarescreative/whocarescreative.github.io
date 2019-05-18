@@ -122,17 +122,17 @@ function init() {
 
     window.addEventListener( 'resize', onWindowResize, false );
 
-    window.addEventListener("mousemove", onMouseMove, false );
-    window.addEventListener("mousedown", onMouseDown, false );
-    window.addEventListener("mouseup", onMouseUp, false );
+    container.addEventListener("mousemove", onMouseMove, false );
+    container.addEventListener("mousedown", onMouseDown, false );
+    container.addEventListener("mouseup", onMouseUp, false );
 
     //touch
-    window.addEventListener('touchstart', onTouchDown, false);
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    container.addEventListener('touchstart', onTouchDown, false);
+    container.addEventListener('touchmove', onTouchMove, { passive: false });
     
-    window.addEventListener('touchcancel', onTouchEnd, false);
+    container.addEventListener('touchcancel', onTouchEnd, false);
     
-    window.addEventListener('touchend', onTouchEnd, false);
+    container.addEventListener('touchend', onTouchEnd, false);
 }
 
 function setClickMarker(x,y,z) {
