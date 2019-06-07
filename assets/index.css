@@ -38,5 +38,6 @@ content {
 @media (max-width: 900px) {
     body {
         font-size: 20px;
+        margin: 16px;
     }
 }
