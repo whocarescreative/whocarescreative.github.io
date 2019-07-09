@@ -1,0 +1,3 @@
+[submodule "joyride"]
+	path = joyride
+	url = git@github.com:vezwork/joyride.git
